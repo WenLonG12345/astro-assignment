@@ -1,0 +1,26 @@
+{
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "files.autoSave": "afterDelay",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.eol": "\r\n",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[typescript]": {
+      "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "codesnap.containerPadding": "1em",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.unicodeHighlight.allowedCharacters": {
+      "️": true
+    },
+    "bracket-pair-colorizer-2.depreciation-notice": false,
+    "editor.tabSize": 2,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.accessibilitySupport": "off"
+}
