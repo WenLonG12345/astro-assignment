@@ -10,15 +10,13 @@ const { toast } = createStandaloneToast();
 export default {
   state: {
     channelList: [],
+    selectedChannel: undefined,
     sortNumber: sortSequence.ascending,
     sortName: sortSequence.ascending,
   },
   reducers: {
     updateChannelList: (state, payload) => {
-      return {
-        ...state,
-        channelList: payload,
-      };
+      return { ...state, channelList: payload };
     },
 
     toggleSortNumber: (state) => {
@@ -65,6 +63,14 @@ export default {
         sortName: seq,
       };
     },
+
+    updateSelectedChannel: (state, payload) => {
+      return { ...state, selectedChannel: payload };
+    },
+
+    resetSelectedChannel: (state) => {
+      return {...state, selectedChannel: undefined};
+    }
   },
   effects: (dispatch) => ({
     async getAllChannel() {
@@ -79,5 +85,20 @@ export default {
         }
       }
     },
+
+    async getSelectedChannel(payload) {
+      const {id} = payload;
+
+      const res = await request(`${apiUrl}/channel/${id}.json`);
+
+      const {status, data} = res;
+
+      if(status === 200) {
+        const { response } = data || {};
+        if (response) {
+          this.updateSelectedChannel(response);
+        }
+      }
+    }
   }),
 };

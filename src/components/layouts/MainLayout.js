@@ -1,13 +1,17 @@
 import { Box, Container } from "@chakra-ui/react";
 import React from "react";
-import Header from "../common/Header";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const MainLayout = ({ children }) => {
   return (
-    <Container maxW={"container.lg"} p={3}>
+    <Box>
       <Header />
-      {children}
-    </Container>
+      <Container maxW={"container.lg"} p={3}>
+        {children}
+      </Container>
+      <Footer/>
+    </Box>
   );
 };
 

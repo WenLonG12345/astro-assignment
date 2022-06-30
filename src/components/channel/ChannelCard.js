@@ -7,15 +7,17 @@ import {
   HStack,
   Image,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import React from "react";
 import { isEmpty } from "lodash";
-import { BiLinkExternal,BiMoviePlay } from "react-icons/bi";
+import { BiLinkExternal, BiMoviePlay } from "react-icons/bi";
 import { MotionBox } from "../../utils/motion";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
-const ChannelCard = ({ channel }) => {
+const ChannelCard = ({ channel, onRedirect }) => {
   const {
     id,
     title,
@@ -32,10 +34,25 @@ const ChannelCard = ({ channel }) => {
   } = channel || {};
 
   return (
-    <MotionBox whileHover={{y: -5}} boxShadow={"lg"} rounded={"lg"} p={4}>
+    <MotionBox
+      whileHover={{ y: -5 }}
+      boxShadow={"lg"}
+      rounded={"lg"}
+      p={4}
+      cursor="pointer"
+      onClick={() => onRedirect(id)}
+      backgroundColor={useColorModeValue("white", "#2d3137")}
+    >
       <Flex flexDir={"row"} align="center">
-        <Center w="60px" h="50px" mr={4}>
-          <Image src={imageUrl} alt={id} fallback={<BiMoviePlay size={25}/>} />
+        <Center
+          w="70px"
+          h="60px"
+          mr={4}
+          backgroundColor={useColorModeValue("white", "gray.700")}
+          borderRadius="8px"
+          p={2}
+        >
+          <Image src={imageUrl} alt={id} fallback={<BiMoviePlay size={25} />} />
         </Center>
 
         <Box>
@@ -45,6 +62,13 @@ const ChannelCard = ({ channel }) => {
           </Text>
         </Box>
       </Flex>
+
+      <HStack my={2}>
+        {isAstroGoExclusive && (
+          <Badge colorScheme="green">Astro Go Exclusive</Badge>
+        )}
+        {isHd && <Badge colorScheme="blue">HD</Badge>}
+      </HStack>
 
       <Divider color={"gray.400"} my={2} />
 
@@ -60,7 +84,7 @@ const ChannelCard = ({ channel }) => {
               <Text fontSize="12px">
                 {isHappening
                   ? "On Now"
-                  : dayjs(schedule.datetime).format("h:mm A")}
+                  : dayjs(schedule.datetime).format("hh:mm A")}
               </Text>
               <Text fontSize="12px" noOfLines={1}>
                 {schedule.title}

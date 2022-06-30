@@ -5,6 +5,7 @@ import {
   Heading,
   HStack,
   IconButton,
+  Input,
   SimpleGrid,
   Spinner,
   Text,
@@ -33,7 +34,6 @@ const mapState = ({ channelModel }) => ({
 const HomePage = ({ channelModel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const toast = useToast();
 
   const { channelList, sortNumber, sortName } = channelModel || [];
   const dataLoading = useSelector(
@@ -46,19 +46,20 @@ const HomePage = ({ channelModel }) => {
     }
   }, [dispatch, router.isReady]);
 
-  // if (dataLoading) {
-  //   return (
-  //     <Flex justify='center' align='center'>
-  //       <Spinner color={colors.primary} size="lg" />
-  //     </Flex>
-  //   );
-  // }
+  if (dataLoading) {
+    return (
+      <Flex justify='center' align='center'>
+        <Spinner color={colors.primary} size="lg" />
+      </Flex>
+    );
+  }
 
   return (
     <Box>
       <Flex justify={"space-between"}>
-        <Heading>Category</Heading>
+        <Heading>All Channels</Heading>
         <HStack>
+          {/* <Input maxW='300px'/> */}
           <IconButton
             icon={
               sortName === sortSequence.ascending ? (
@@ -87,7 +88,11 @@ const HomePage = ({ channelModel }) => {
 
       <SimpleGrid columns={[1, 1, 2, 3, 3, 3]} gap={5} mt={10}>
         {channelList?.map((channel) => (
-          <ChannelCard channel={channel} key={channel.id} />
+          <ChannelCard
+            channel={channel}
+            key={channel.id}
+            onRedirect={(id) => router.push(`/channels/${id}`)}
+          />
         ))}
       </SimpleGrid>
     </Box>

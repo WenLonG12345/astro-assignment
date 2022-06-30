@@ -12,14 +12,19 @@ import {
   Text,
   Avatar,
   Button,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { headerLinks, colors } from "../../utils/constants";
 import { useRouter } from "next/router";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+
+  const headerTitleColor = useColorModeValue("gray.700", "gray.300");
 
   let router = useRouter();
   let { asPath } = router;
@@ -38,7 +43,7 @@ const Header = () => {
               bg: "gray.300",
               color: "gray.700",
             }}
-            color={link.route === asPath ? colors.primary : "gray.700"}
+            color={link.route === asPath ? colors.primary : headerTitleColor}
             onClick={isOpen ? onClose : onOpen}
           >
             <Text fontWeight={"bold"} noOfLines={1} fontSize={"18px"}>
@@ -58,8 +63,9 @@ const Header = () => {
         top: "0",
         zIndex: "99",
       }}
-      pb={4}
-      backgroundColor="rgba(255, 255, 255, 0.8)"
+      py={2}
+      px={10}
+      backgroundColor={useColorModeValue('white', 'blackAlpha.500')}
       backdropFilter="saturate(180%) blur(5px)"
       w="100%"
     >
@@ -68,7 +74,7 @@ const Header = () => {
         alignItems={"center"}
         justifyContent={"space-between"}
         mx="auto"
-        maxW={"container.xl"}
+        maxW={"container.lg"}
         py={5}
       >
         <HStack
@@ -86,6 +92,10 @@ const Header = () => {
         {/* LARGE SCREEN */}
         <HStack as="nav" spacing="4" display={{ base: "none", md: "flex" }}>
           {headerItem}
+          <IconButton
+            icon={colorMode === 'light'? <SunIcon/>: <MoonIcon/>}
+            onClick={toggleColorMode}
+          />
         </HStack>
 
         {/* BASE SCREEN */}
@@ -95,6 +105,10 @@ const Header = () => {
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             onClick={isOpen ? onClose : onOpen}
+          />
+           <IconButton
+            icon={colorMode === 'light'? <SunIcon/>: <MoonIcon/>}
+            onClick={toggleColorMode}
           />
         </HStack>
       </Flex>

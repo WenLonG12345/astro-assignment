@@ -7,14 +7,24 @@ export const headerLinks = [
   {
     title: "About",
     route: "/about",
-  }
-]
+  },
+];
 
 export const colors = {
-  primary: '#ed008c'
-}
+  primary: "#ed008c",
+};
 
 export const sortSequence = {
-  ascending: 'ascending',
-  desending: 'descending'
-}
+  ascending: "ascending",
+  desending: "descending",
+};
+
+export const weekday = [
+  "Sun",
+  "Mon",
+  "Tues",
+  "Wed",
+  "Thurs",
+  "Fri",
+  "Sat",
+];
