@@ -24,20 +24,23 @@ import {
   AiOutlineSortDescending,
 } from "react-icons/ai";
 import { BsSortNumericDown, BsSortNumericUpAlt } from "react-icons/bs";
+import FilterButton from "../components/channel/FilterButton";
 
 dayjs.extend(relativeTime);
 
-const mapState = ({ channelModel }) => ({
+const mapState = ({ channelModel, favouriteModel }) => ({
   channelModel,
+  favouriteModel,
 });
 
-const HomePage = ({ channelModel }) => {
+const HomePage = ({ channelModel, favouriteModel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
   const { channelList, sortNumber, sortName } = channelModel || [];
+  const { favouriteList } = favouriteModel || [];
   const dataLoading = useSelector(
-    (state) => state.loading.effects.channelModel.getAllChannel
+    (state) => state.loading.effects.channelModel?.getAllChannel
   );
 
   useEffect(() => {
@@ -48,7 +51,7 @@ const HomePage = ({ channelModel }) => {
 
   if (dataLoading) {
     return (
-      <Flex justify='center' align='center'>
+      <Flex justify="center" align="center" h="76vh">
         <Spinner color={colors.primary} size="lg" />
       </Flex>
     );
@@ -56,8 +59,8 @@ const HomePage = ({ channelModel }) => {
 
   return (
     <Box>
-      <Flex justify={"space-between"}>
-        <Heading>All Channels</Heading>
+      <Flex justify={"space-between"} px={3}>
+        <Heading>Channels</Heading>
         <HStack>
           {/* <Input maxW='300px'/> */}
           <IconButton
@@ -82,7 +85,7 @@ const HomePage = ({ channelModel }) => {
             }
             onClick={() => dispatch.channelModel.toggleSortNumber()}
           />
-          <Button leftIcon={<AiOutlineFilter />}>Filter</Button>
+         <FilterButton/>
         </HStack>
       </Flex>
 
@@ -90,8 +93,12 @@ const HomePage = ({ channelModel }) => {
         {channelList?.map((channel) => (
           <ChannelCard
             channel={channel}
+            favouriteList={favouriteList}
             key={channel.id}
             onRedirect={(id) => router.push(`/channels/${id}`)}
+            onFavourite={(channel) =>
+              dispatch.favouriteModel.toggleFavourite(channel)
+            }
           />
         ))}
       </SimpleGrid>

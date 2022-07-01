@@ -13,6 +13,7 @@ export default {
     selectedChannel: undefined,
     sortNumber: sortSequence.ascending,
     sortName: sortSequence.ascending,
+    filters: {}
   },
   reducers: {
     updateChannelList: (state, payload) => {
@@ -70,6 +71,14 @@ export default {
 
     resetSelectedChannel: (state) => {
       return {...state, selectedChannel: undefined};
+    },
+
+    setFilters: (state, payload) => {
+      return {...state, filters: payload};
+    },
+
+    clearFilters: (state) => {
+      return {...state, filters: {}}
     }
   },
   effects: (dispatch) => ({

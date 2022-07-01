@@ -19,12 +19,26 @@ export const sortSequence = {
   desending: "descending",
 };
 
-export const weekday = [
-  "Sun",
-  "Mon",
-  "Tues",
-  "Wed",
-  "Thurs",
-  "Fri",
-  "Sat",
+export const weekday = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+
+export const categoryList = [
+  "Variety Entertainment",
+  "Special Interest",
+  "Movies",
+  "Music",
+  "Kids",
+  "News",
+  "Learning",
+  "Lifestyle",
+  "Sports",
+  "Radio",
+];
+
+export const languageList = [
+  "Malay",
+  "Multiple Language",
+  "Indian",
+  "Chinese",
+  "Korean & Japanese",
+  "International",
 ];

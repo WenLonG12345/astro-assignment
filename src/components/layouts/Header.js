@@ -65,7 +65,7 @@ const Header = () => {
       }}
       py={2}
       px={10}
-      backgroundColor={useColorModeValue('white', 'blackAlpha.500')}
+      backgroundColor={useColorModeValue("blackAlpha.100", "blackAlpha.500")}
       backdropFilter="saturate(180%) blur(5px)"
       w="100%"
     >
@@ -93,7 +93,7 @@ const Header = () => {
         <HStack as="nav" spacing="4" display={{ base: "none", md: "flex" }}>
           {headerItem}
           <IconButton
-            icon={colorMode === 'light'? <SunIcon/>: <MoonIcon/>}
+            icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
             onClick={toggleColorMode}
           />
         </HStack>
@@ -106,8 +106,8 @@ const Header = () => {
             aria-label={"Open Menu"}
             onClick={isOpen ? onClose : onOpen}
           />
-           <IconButton
-            icon={colorMode === 'light'? <SunIcon/>: <MoonIcon/>}
+          <IconButton
+            icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
             onClick={toggleColorMode}
           />
         </HStack>

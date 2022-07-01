@@ -17,9 +17,8 @@ import { isEmpty } from "lodash";
 import { BiLinkExternal, BiMoviePlay } from "react-icons/bi";
 import { MotionBox } from "../../utils/motion";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
-import { includes } from "lodash";
 
-const ChannelCard = ({ channel, favouriteList, onRedirect, onFavourite }) => {
+const FavouriteChannelCard = ({ channel, onRedirect, onDelete }) => {
   const {
     id,
     title,
@@ -34,8 +33,6 @@ const ChannelCard = ({ channel, favouriteList, onRedirect, onFavourite }) => {
     detailUrl,
     currentSchedule,
   } = channel || {};
-
-  const isFavourite = favouriteList?.some(item => item.id === id);
 
   return (
     <MotionBox
@@ -74,10 +71,10 @@ const ChannelCard = ({ channel, favouriteList, onRedirect, onFavourite }) => {
 
         <IconButton
           rounded="full"
-          icon={isFavourite ? <AiFillStar color='#FFBF00'/> : <AiOutlineStar/>}
+          icon={<AiFillStar color='#FFBF00'/>}
           onClick={(e) => {
             e.stopPropagation();
-            onFavourite(channel)
+            onDelete(channel)
           }}
         />
       </Flex>
@@ -122,4 +119,4 @@ const ChannelCard = ({ channel, favouriteList, onRedirect, onFavourite }) => {
   );
 };
 
-export default ChannelCard;
+export default FavouriteChannelCard;
