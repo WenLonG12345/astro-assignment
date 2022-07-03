@@ -25,12 +25,11 @@ const FavouritePage = ({ favouriteModel }) => {
   const router = useRouter();
 
   return (
-    <Box h={{base: 'calc(100vh - 220px)', md: 'calc(100vh - 180px)'}}>
+    <Box minH={{base: 'calc(100vh - 220px)', md: 'calc(100vh - 180px)'}}>
       {isEmpty(favouriteList) ? (
         <Stack
           justify="center"
           align="center"
-          minH={"76vh"}
           flexDir="column"
           spacing={3}
         >

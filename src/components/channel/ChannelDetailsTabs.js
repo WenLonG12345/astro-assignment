@@ -19,7 +19,7 @@ const ChannelDetailsTabs = ({ schedule, textColor }) => {
   let events = Object.values(schedule);
 
   return (
-    <Tabs>
+    <Tabs overflowX='auto'>
       <TabList>
         {date?.map((d) => {
           const dt = new Date(d);
