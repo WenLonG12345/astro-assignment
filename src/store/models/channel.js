@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { sortSequence } from "../../utils/constants";
 import request from "../../utils/request";
-import { sortBy } from "lodash";
+import { isEmpty, sortBy } from "lodash";
 import { createStandaloneToast } from "@chakra-ui/react";
 
 const apiUrl = process.env.API_URL;
@@ -13,7 +13,6 @@ export default {
     selectedChannel: undefined,
     sortNumber: sortSequence.ascending,
     sortName: sortSequence.ascending,
-    filters: {}
   },
   reducers: {
     updateChannelList: (state, payload) => {
@@ -26,12 +25,6 @@ export default {
         sortNumber === sortSequence.ascending
           ? sortSequence.desending
           : sortSequence.ascending;
-
-      toast({
-        title: `Channel number sorted in ${seq} order`,
-        position: "top-right",
-        status: "success",
-      });
 
       return {
         ...state,
@@ -49,11 +42,6 @@ export default {
         sortName === sortSequence.ascending
           ? sortSequence.desending
           : sortSequence.ascending;
-      toast({
-        title: `Channel name sorted in ${seq} order`,
-        position: "top-right",
-        status: "success",
-      });
 
       return {
         ...state,
@@ -70,16 +58,8 @@ export default {
     },
 
     resetSelectedChannel: (state) => {
-      return {...state, selectedChannel: undefined};
+      return { ...state, selectedChannel: undefined };
     },
-
-    setFilters: (state, payload) => {
-      return {...state, filters: payload};
-    },
-
-    clearFilters: (state) => {
-      return {...state, filters: {}}
-    }
   },
   effects: (dispatch) => ({
     async getAllChannel() {
@@ -96,18 +76,18 @@ export default {
     },
 
     async getSelectedChannel(payload) {
-      const {id} = payload;
+      const { id } = payload;
 
       const res = await request(`${apiUrl}/channel/${id}.json`);
 
-      const {status, data} = res;
+      const { status, data } = res;
 
-      if(status === 200) {
+      if (status === 200) {
         const { response } = data || {};
         if (response) {
           this.updateSelectedChannel(response);
         }
       }
-    }
+    },
   }),
 };

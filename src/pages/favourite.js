@@ -11,7 +11,7 @@ import {
 import { isEmpty } from "lodash";
 import React from "react";
 import { connect, useDispatch } from "react-redux";
-import { colors } from "../utils/constants";
+import { colors, systemHeight } from "../utils/constants";
 import FavouriteChannelCard from "../components/channel/FavouriteChannelCard";
 import { useRouter } from "next/router";
 
@@ -25,7 +25,7 @@ const FavouritePage = ({ favouriteModel }) => {
   const router = useRouter();
 
   return (
-    <Box minH={"76vh"}>
+    <Box h={{base: 'calc(100vh - 220px)', md: 'calc(100vh - 180px)'}}>
       {isEmpty(favouriteList) ? (
         <Stack
           justify="center"

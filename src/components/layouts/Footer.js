@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { AiOutlineGlobal } from "react-icons/ai";
 
-const Footer = () => {
+const Footer = ({...footerProps}) => {
   return (
     <Flex
       py={3}
@@ -19,6 +19,7 @@ const Footer = () => {
       align='center'
       textAlign={{ base: "center", md: "start" }}
       flexDir={{ base: "column", md: "row" }}
+      {...footerProps}
     >
       <Text>
         © {new Date().getFullYear()} MEASAT Broadcast Network Systems Sdn Bhd.

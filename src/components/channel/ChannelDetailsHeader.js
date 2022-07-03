@@ -38,7 +38,7 @@ const ChannelDetailsHeader = ({
         </Box>
       </Flex>
 
-      <Text>{description}</Text>
+      <Text mt={3}>{description}</Text>
     </Box>
   );
 };

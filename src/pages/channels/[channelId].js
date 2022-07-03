@@ -9,12 +9,12 @@ const mapState = ({ channelModel }) => ({
   selectedChannel: channelModel.selectedChannel,
 });
 
-const ChannelDetailsPage = ({selectedChannel}) => {
+const ChannelDetailsPage = ({ selectedChannel }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { channelId } = router.query;
 
-  const textColor = useColorModeValue('gray.700', "gray.300")
+  const textColor = useColorModeValue("gray.700", "gray.300");
 
   useEffect(() => {
     dispatch.channelModel.getSelectedChannel({ id: channelId });
@@ -22,12 +22,15 @@ const ChannelDetailsPage = ({selectedChannel}) => {
     return () => dispatch.channelModel.resetSelectedChannel();
   }, [router.isReady, dispatch, channelId]);
 
-  console.log('details', {selectedChannel});
+  console.log("details", { selectedChannel });
 
   return (
-    <Container maxW={'container.md'}>
-      <ChannelDetailsHeader {...selectedChannel}/>
-      <ChannelDetailsTabs {...selectedChannel} textColor={textColor}/>
+    <Container
+      maxW={"container.md"}
+      minH={{ base: "calc(100vh - 220px)", md: "calc(100vh - 180px)" }}
+    >
+      <ChannelDetailsHeader {...selectedChannel} />
+      <ChannelDetailsTabs {...selectedChannel} textColor={textColor} />
     </Container>
   );
 };

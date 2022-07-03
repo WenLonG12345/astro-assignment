@@ -20,7 +20,7 @@ import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { headerLinks, colors } from "../../utils/constants";
 import { useRouter } from "next/router";
 
-const Header = () => {
+const Header = ({...headerProps}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -68,6 +68,8 @@ const Header = () => {
       backgroundColor={useColorModeValue("blackAlpha.100", "blackAlpha.500")}
       backdropFilter="saturate(180%) blur(5px)"
       w="100%"
+      pos='fixed'
+      {...headerProps}
     >
       <Flex
         h={16}
